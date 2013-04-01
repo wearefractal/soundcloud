@@ -1,12 +1,12 @@
 {
-  "name": "singly",
+  "name": "soundcloud",
   "version": "0.0.1",
   "dependencies": {
     "component/cookie":"*",
     "visionmedia/superagent": "*"
   },
-  "main": "dist/singly.js",
+  "main": "dist/soundcloud.js",
   "scripts": [
-    "dist/singly.js"
+    "dist/soundcloud.js"
   ]
 }

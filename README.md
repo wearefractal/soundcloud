@@ -2,11 +2,11 @@
 
 <table>
 <tr>
-<td>Package</td><td>singly</td>
+<td>Package</td><td>soundcloud</td>
 </tr>
 <tr>
 <td>Description</td>
-<td>Singly authentication for single page apps</td>
+<td>Soundcloud API client</td>
 </tr>
 <tr>
 <td>Size</td>
@@ -17,27 +17,27 @@
 ## Usage
 
 ```javascript
-singly.setKey("APP KEY");
+soundcloud.setKey("APP KEY");
 
 //typical auth usage will look something like this
 
-if (!singly.token()) {
+if (!soundcloud.token()) {
   // Calling authorize will take the user away
   // and bring them back when they have authenticated.
-  // singly.token() will be set after this
-  singly.authorize('twitter');
+  // soundcloud.token() will be set after this
+  soundcloud.authorize();
 } else {
-  //go to app
+  //go to app and call apis
 }
 ```
 
 ```javascript
-//typical api usage will look something like this
-// singly has get,post,put, and del functions.
+// typical api usage will look something like this
+// soundcloud has get,post,put, and del functions.
 // usage is path, opt?, cb?
 // opt can have data and qs keys
 
-singly.get('/twitter/friends', function(err, res) {
+soundcloud.get('/me', function(err, res) {
   //res is the response object
 });
 
@@ -50,7 +50,7 @@ var myOpt = {
   }
 };
 
-singly.post('/profiles/self', myOpt, function(err, res) {
+soundcloud.post('/someapi', myOpt, function(err, res) {
   //res is the response object
 });
 

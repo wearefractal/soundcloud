@@ -1,0 +1,16 @@
+<html>
+  <head>
+    <script src="./soundcloud.js"></script>
+    <script>
+      soundcloud.setKey("e33382e5f8662c0e829fe7c644a015a6");
+
+      if (soundcloud.token()) {
+        soundcloud.get('/me', function(err, res){
+            console.log(err, res);
+        });
+      } else {
+        soundcloud.authorize();
+      }
+    </script>
+  </head>
+</html>
