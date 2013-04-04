@@ -11,7 +11,7 @@ getParam = (param) ->
   return match[1]
 
 soundcloud =
-  base: "http://api.soundcloud.com"
+  base: "https://api.soundcloud.com"
   cookieName: "soundcloud_access_token"
   setKey: (key) -> apiKey = key
   token: -> 
