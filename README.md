@@ -56,6 +56,13 @@ soundcloud.post('/someapi', myOpt, function(err, res) {
 
 ```
 
+## Development
+
+```
+$ npm install && npm install -g component && npm install -g node-static
+$ make && static examples/
+```
+
 ## LICENSE
 
 (MIT License)
