@@ -1,5 +1,4 @@
 cookie = require 'cookie'
-request = require 'superagent'
 
 apiKey = null
 
@@ -29,33 +28,52 @@ soundcloud =
     return soundcloud
 
   makeRequest: (path, opt={}, type, cb) ->
+
+    # query encoder
+    query = (queryObj) ->
+      if queryObj
+        return encodeURIComponent(k)+"="+encodeURIComponent(v)+"&" for k, v of queryObj
+
     if typeof opt is 'function' and !cb
       cb = opt
       opt = {}
     uri = "#{soundcloud.base}#{path}"
-    req = request[type](uri)
+    req = new XMLHttpRequest()
+    qs  = ""
+
+    # on response
+    req.onreadystatechange = ->
+      if req.readyState is 4 and req.status is 200
+        cb null, req.responseText
+     
+    # qs
+    qs = query opt.qs if opt.qs
 
     # headers
-    req.set opt.headers if opt.headers
-
-    # qs
-    req.query opt.qs if opt.qs
-
+    if opt.headers
+      req.setRequestHeader(header, value) for header, value of opt.headers
 
     if soundcloud.token()
-      req.query oauth_token: soundcloud.token()
+      qs += query oauth_token: soundcloud.token()
     else
-      req.query client_id: apiKey
+      qs += client_id: apiKey
 
-    req.query
+    qs += query
       "_status_code_map[302]": 200
       format: "json"
 
-    # body
-    if opt.data
-      req.send opt.data
+    # TODO: body
+    # if opt.data
+    
+    if type is "get" and qs? then uri += "?#{qs}"
 
-    req.end cb
+    req.open type, uri, true
+
+    if type is "post" and qs?
+      req.send qs
+    else
+      req.send()
+
     return req
 
   get: (path, opt, cb) ->
